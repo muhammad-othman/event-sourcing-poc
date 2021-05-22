@@ -29,6 +29,9 @@ namespace UsersService
             services.AddSwaggerGen();
 
             services.AddScoped<IUsersEventsStore, UsersEventsStore>();
+
+            var store = services.BuildServiceProvider().GetService<IUsersEventsStore>();
+            store.ReprocessEventsAsync();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
