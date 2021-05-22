@@ -87,17 +87,20 @@ namespace UsersService.Data
         private void SaveAndProcessEvent(UserEvent userEvent)
         {
             usersEventsCollection.InsertOne(userEvent);
-            
-            //Publish Events
+
+            PublishUserEvent(userEvent);
 
             ProcessEvent(userEvent);
         }
 
-        private void ProcessEvent(UserEvent userEvent)
+        private void PublishUserEvent(UserEvent userEvent)
         {
-            // TODO move to SaveAndProcessEvent 
             var body = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(userEvent));
             rabbitMQChannel.BasicPublish("users.exchange", "", null, body);
+        }
+
+        private void ProcessEvent(UserEvent userEvent)
+        {
 
             switch (userEvent.Type)
             {
