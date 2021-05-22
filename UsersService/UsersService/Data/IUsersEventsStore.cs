@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace UsersService.Data
 {
@@ -9,5 +10,6 @@ namespace UsersService.Data
         User AddUser(User newUser);
         void DeleteUser(Guid id);
         User UpdateUser(User updatedUser);
+        Task ReprocessEventsAsync(int limit = 0);
     }
 }

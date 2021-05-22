@@ -45,5 +45,12 @@ namespace UsersService.Controllers
             usersEventsStore.DeleteUser(id);
             return Ok();
         }
+
+        [HttpPost("reprocessevents")]
+        public async Task<IActionResult> ReprocessEventsAsync(int limit)
+        {
+            await usersEventsStore.ReprocessEventsAsync(limit);
+            return Ok();
+        }
     }
 }

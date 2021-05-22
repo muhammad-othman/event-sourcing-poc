@@ -95,5 +95,22 @@ namespace UsersService.Data
                     break;
             }
         }
+
+        public async Task ReprocessEventsAsync(int limit = 0)
+        {
+            usersList = new List<User>();
+
+            var collectionList = usersEventsCollection.Find(_ => true).SortBy(e => e.Created);
+
+            if (limit != 0)
+                collectionList.Limit(limit);
+
+            var events = await collectionList.ToListAsync();
+
+            foreach (var @event in events)
+            {
+                ProcessEvent(@event);
+            }
+        }
     }
 }
