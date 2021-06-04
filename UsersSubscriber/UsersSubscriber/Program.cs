@@ -19,7 +19,7 @@ namespace UsersSubscriber
             factory.UserName = "guest";
             factory.Password = "guest";
 
-            factory.HostName = "45.63.116.153";
+            factory.HostName = "replacehere";
             factory.Port = 5672;
 
 
